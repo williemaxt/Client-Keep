@@ -3,9 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueCookies from 'vue-cookies' //importing vue-cookies
 
 Vue.config.productionTip = false
-
+Vue.use(VueCookies) //using vue cookies
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

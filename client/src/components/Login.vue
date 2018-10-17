@@ -13,8 +13,8 @@
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-danger">Login</button>
-  <a href="#/Signup"><button type="submit" class="btn btn-light">Signup</button></a>
+  <button type="submit" class="btn btn-danger" v-on:click="setCookie">Login</button>
+  <a href="#/Signup"><button type="submit" class="btn btn-light" v-on:click="getCookie">Signup</button></a>
   <br>
   <br>
   <a href="#/Reset"><p class="text-muted text-center">Forgot Password?</p></a>
@@ -28,6 +28,16 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    setCookie(){ //this function is for testing
+      this.$cookies.set('email', 'williemaxt@gmail.com')
+      console.log('The cookie has been set')
+    },
+    getCookie(){ //this function is for testing
+    var cookie = this.$cookies.get('email')
+    console.log('this is the cookie: '+ cookie)
     }
   }
 }

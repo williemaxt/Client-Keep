@@ -6,7 +6,7 @@
   <div class="card-body">
     <h5 class="card-title">Total Contacts</h5>
     <h6 class="card-subtitle mb-2 text-muted">So Far</h6>
-    <h1 class="card-text text-center display-3 text-danger">627</h1>
+    <h1 class="card-text text-center display-3 text-danger">15</h1>
   </div>
 </div>
   </div>
@@ -34,11 +34,11 @@
   <div class="col">
     <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h5 class="card-title">Your Info</h5>
+    <h6 class="card-subtitle mb-2 text-muted">This Is You</h6>
+    <p class="card-text text-danger">William Thompson</p>
+    <p class="card-text text-danger">williemaxt@gmail.com</p>
+    <p class="card-text text-danger">(215)-824-5998</p>
   </div>
 </div>
   </div>
