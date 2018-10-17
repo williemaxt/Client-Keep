@@ -37,7 +37,7 @@ export default {
   name: 'Clients',
   data(){
     return{
-
+      //data goes here
     }
   }
 }

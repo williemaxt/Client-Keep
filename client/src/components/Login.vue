@@ -3,17 +3,20 @@
   <h1 class="display-2 text-danger">Client Keep</h1>
   <p class="text-muted">by 611 Solutions</p>
   <br>
+  <div class="alert alert-danger" role="alert" v-show="prompt">
+  {{prompt}}
+  </div>
   <form>
   <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" v-model="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" v-model="password" id="password" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-danger" v-on:click="setCookie">Login</button>
+  <button type="submit" class="btn btn-danger" v-on:click="login">Login</button>
   <a href="#/Signup"><button type="submit" class="btn btn-light" v-on:click="getCookie">Signup</button></a>
   <br>
   <br>
@@ -23,11 +26,14 @@
 </template>
 
 <script>
+import ApiService from '@/services/ApiService'
 export default {
   name: 'Login',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      prompt: '',
+      email: null,
+      password: null
     }
   },
   methods: {
@@ -38,6 +44,29 @@ export default {
     getCookie(){ //this function is for testing
     var cookie = this.$cookies.get('email')
     console.log('this is the cookie: '+ cookie)
+    },
+    async login(){
+      console.log('Register button was clicked')
+      if(this.email == null || this.password == null){
+        this.prompt = 'Please check all fields'
+        console.log('the form was not valid')
+      } else {
+        console.log('the form was valid')
+        //establish the function call as a constant
+        // await can only be used ina an async function
+        const response = await ApiService.login({
+          email: this.email,
+          password: this.password
+        })
+        const userEmail = response.data.email
+        console.log('response is: '+userEmail)
+        //redirecting to dashboard page
+        if (this.email == userEmail){
+          this.$router.push({name: 'Dashboard', params:{email: this.email}});
+        } else {
+          this.prompt = 'Login Failed'
+        }
+      }
     }
   }
 }
