@@ -17,6 +17,10 @@
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div class="form-group">
+    <label for="InputNumber">Phone Number</label>
+    <input type="number" class="form-control" id="number" v-model="number" placeholder="Password">
+  </div>
+  <div class="form-group">
     <label for="password">Password</label>
     <input type="password" class="form-control" id="password" v-model="password" placeholder="Password">
   </div>
@@ -41,6 +45,7 @@ export default {
     return {
       name: null,
       email: null,
+      number: null,
       password: null,
       prompt: null
     }
@@ -48,7 +53,7 @@ export default {
   methods: {
     async register(){
    console.log('Register button was clicked')
-   if(this.email == null || this.password == null || this.name == null){
+   if(this.email == null || this.password == null || this.name == null || this.number == null){
      this.prompt = 'Please check all fields'
      console.log('the form was not valid')
    } else {
@@ -57,12 +62,14 @@ export default {
      const response = await ApiService.register({
        email: this.email,
        password: this.password,
-       name: this.name
+       name: this.name,
+       number: this.number
      })
      console.log(response.data)
      // clearing the fields
      this.email = null
      this.password = null
+     this.name = null
      this.name = null
    }
  }

@@ -10,14 +10,44 @@ app.use(cors())
 app.use(bodyParser.json())
 
 console.log('server is running * * *')
-//getting the users info
-app.get('/getInfo', (req,res) => {
 
+app.post('/createClient', (req,res) => {
+  var userEmail = req.body.userEmail;
+  var name = req.body.name;
+  var email = req.body.email;
+  var number = req.body.number;
+  var details = req.body.details;
+  connection.conn.connect();
+  // sql query
+  var sql = 'INSERT INTO clients (userEmail, name, email, number, details) VALUES ("'+userEmail+'", "'+name+'", "'+email+'", "'+number+'", "'+details+'")';
+  // executing the query
+  connection.conn.query(sql, function (err, result) {
+    console.log(result);
+  })
   res.send({
-    name: 'William Thompson', //put query results here
-    number: '2158245998'
+    message: 'success'
   })
 })
+
+//getting the users info
+app.post('/getInfo', (req,res) => {
+  var email = req.body.email;
+  console.log('the email is: ' + email);
+  // sql query
+  connection.conn.connect()
+  // example query to show that we can select individuals
+  var sql = 'SELECT * FROM users WHERE email LIKE "'+email+'"'
+  console.log(sql)
+  // executing the query
+  connection.conn.query(sql, function (err, result, fields) {
+    console.log(result);
+    res.send({
+      name: result[0].name, //put query results here
+      number: result[0].number
+    })
+  })
+})
+
 app.post('/login', (req,res) => {
   //perform queries and bcrypt actions here
 //Setting variables for email and password
@@ -58,13 +88,14 @@ app.post('/register', (req,res) => {
   var email = req.body.email
   var password = req.body.password
   var name = req.body.name
+  var number = req.body.number
   let hash = bcrypt.hashSync(password, 12); // TODO: change value
   //logging for development
   console.log(hash);
   // sql query
   connection.conn.connect()
   // example query to show that we can select individuals
-  var sql = 'INSERT INTO users (name, email, password) VALUES ("'+name+'", "'+email+'", "'+hash+'")'
+  var sql = 'INSERT INTO users (name, email, password, number) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+number+'")'
   // executing the query
   connection.conn.query(sql, function (err, result) {
     if (err) throw err;

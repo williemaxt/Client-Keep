@@ -9,7 +9,10 @@ export default {
     return Api().post('login', credentials)
   },
   getInfo(credentials){
-    return Api().get('getInfo', credentials)
+    return Api().post('getInfo', credentials)
+  },
+  createClient(credentials){
+    return Api().post('createClient', credentials)
   }
 }
 

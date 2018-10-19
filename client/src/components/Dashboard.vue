@@ -43,7 +43,7 @@
   </div>
   <div class="col-4">
     <!--Component for adding clients-->
-    <AddClient/>
+    <AddClient :userEmail="userEmail"/>
   </div>
 </div>
   </div>
