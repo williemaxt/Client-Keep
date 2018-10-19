@@ -10,6 +10,14 @@ app.use(cors())
 app.use(bodyParser.json())
 
 console.log('server is running * * *')
+//getting the users info
+app.get('/getInfo', (req,res) => {
+
+  res.send({
+    name: 'William Thompson', //put query results here
+    number: '2158245998'
+  })
+})
 app.post('/login', (req,res) => {
   //perform queries and bcrypt actions here
 //Setting variables for email and password

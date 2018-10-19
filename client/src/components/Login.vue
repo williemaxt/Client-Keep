@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     setCookie(){ //this function is for testing
-      this.$cookies.set('email', 'williemaxt@gmail.com')
+      this.$cookies.set('email', this.email)
       console.log('The cookie has been set')
     },
     getCookie(){ //this function is for testing
@@ -60,6 +60,7 @@ export default {
         })
         const userEmail = response.data.email
         console.log('response is: '+userEmail)
+        this.setCookie() //calling set cookie method
         //redirecting to dashboard page
         if (this.email == userEmail){
           this.$router.push({name: 'Dashboard', params:{email: this.email}});

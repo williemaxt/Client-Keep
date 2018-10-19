@@ -32,15 +32,8 @@
 </div>
   </div>
   <div class="col">
-    <div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Your Info</h5>
-    <h6 class="card-subtitle mb-2 text-muted">This Is You</h6>
-    <p class="card-text text-danger">William Thompson</p>
-    <p class="card-text text-danger">williemaxt@gmail.com</p>
-    <p class="card-text text-danger">(215)-824-5998</p>
-  </div>
-</div>
+    <!--Component for Your Info-->
+    <YourInfo :userEmail="userEmail"/>
   </div>
 </div>
 <div class="row">
@@ -59,17 +52,20 @@
 <script>
 import AddClient from '@/components/dashComponents/AddClient'
 import Clients from '@/components/dashComponents/Clients'
+import YourInfo from '@/components/dashComponents/YourInfo'
 export default {
   name: 'Dashboard',
   data(){
     return{
       //put data here
+      userEmail: this.$cookies.get('email')
     }
   },
   components: {
     AddClient,
-    Clients
-  }
+    Clients,
+    YourInfo
+  },
 }
 </script>
 
