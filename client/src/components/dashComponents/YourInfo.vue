@@ -1,5 +1,5 @@
 <template>
-  <div class="card" v-on:click="getInfo">
+  <div class="card">
     <div class="card-body">
       <h5 class="card-title">Your Info</h5>
       <h6 class="card-subtitle mb-2 text-muted">This Is You</h6>
@@ -21,8 +21,7 @@ export default {
       name: null
     }
   },
-  methods: {
-    async getInfo(){
+  mounted: async function(){
       const response = await ApiService.getInfo({
         email: this.userEmail
       })
@@ -30,7 +29,6 @@ export default {
       this.number = response.data.number // getting number from server
       this.name = response.data.name // getting name from server
     }
-  }
 }
 </script>
 
