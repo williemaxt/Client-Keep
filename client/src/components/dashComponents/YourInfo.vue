@@ -21,10 +21,10 @@ export default {
       name: null
     }
   },
-  mounted: async function(){
+  async mounted(){
       const response = await ApiService.getInfo({
         email: this.userEmail
-      })
+      }) 
       console.log('response is: '+response.data.name)
       this.number = response.data.number // getting number from server
       this.name = response.data.name // getting name from server

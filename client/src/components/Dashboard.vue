@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="body-container">
     <div class="row">
   <div class="col">
     <div class="card">
@@ -39,7 +39,7 @@
 <div class="row">
   <div class="col-8">
     <!--Component for showing clients-->
-    <Clients/>
+    <Clients :userEmail="userEmail"/>
   </div>
   <div class="col-4">
     <!--Component for adding clients-->
@@ -73,6 +73,7 @@ export default {
   .container{
     max-width: 1800px;
     font-family: 'K2D', sans-serif;
+    background: radial-gradient(#ff0000, #fff);
   }
   .card{
     margin-top:30px;

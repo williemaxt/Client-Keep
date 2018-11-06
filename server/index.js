@@ -9,7 +9,22 @@ const app = express();
 app.use(cors())
 app.use(bodyParser.json())
 
-console.log('server is running * * *')
+console.log('server is running * * *');
+
+app.post('/getClients', (req,res) => {
+  //creating a variable for data
+  var data;
+  //getting the user email from the rquest body
+  var userEmail = req.body.userEmail;
+  //sql query
+  var sql = 'SELECT * FROM clients WHERE userEmail LIKE "'+userEmail+'"';
+  // executing the query
+  connection.conn.query(sql, function (err, result, fields) {
+    console.log(result);
+    //stringifying result in data
+    res.send(result)
+  })
+});
 
 app.post('/createClient', (req,res) => {
   var userEmail = req.body.userEmail;
@@ -17,24 +32,20 @@ app.post('/createClient', (req,res) => {
   var email = req.body.email;
   var number = req.body.number;
   var details = req.body.details;
-  connection.conn.connect();
   // sql query
   var sql = 'INSERT INTO clients (userEmail, name, email, number, details) VALUES ("'+userEmail+'", "'+name+'", "'+email+'", "'+number+'", "'+details+'")';
   // executing the query
   connection.conn.query(sql, function (err, result) {
     console.log(result);
+    res.send(result)
   })
-  res.send({
-    message: 'success'
-  })
-})
+});
 
 //getting the users info
 app.post('/getInfo', (req,res) => {
   var email = req.body.email;
   console.log('the email is: ' + email);
   // sql query
-  connection.conn.connect()
   // example query to show that we can select individuals
   var sql = 'SELECT * FROM users WHERE email LIKE "'+email+'"'
   console.log(sql)
@@ -55,7 +66,6 @@ var email = req.body.email;
 var password = req.body.password;
 var hash;
 // sql query
-connection.conn.connect()
 // example query to show that we can select individuals
 var sql = 'SELECT password FROM users WHERE email LIKE "'+email+'"'
 console.log(sql)
@@ -79,8 +89,6 @@ connection.conn.query(sql, function (err, result, fields) {
   console.log('the login was not successful');
   }
 })
-//closing the connection
-connection.conn.end()
 });
 
 app.post('/register', (req,res) => {
@@ -92,8 +100,6 @@ app.post('/register', (req,res) => {
   let hash = bcrypt.hashSync(password, 12); // TODO: change value
   //logging for development
   console.log(hash);
-  // sql query
-  connection.conn.connect()
   // example query to show that we can select individuals
   var sql = 'INSERT INTO users (name, email, password, number) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+number+'")'
   // executing the query
@@ -101,8 +107,6 @@ app.post('/register', (req,res) => {
     if (err) throw err;
     console.log("Account Created");
   })
-  //closing the connection
-  connection.conn.end()
   res.send({
     message: `Hello ${req.body.name} you have successfully registered`
   })

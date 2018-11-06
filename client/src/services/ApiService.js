@@ -13,6 +13,9 @@ export default {
   },
   createClient(credentials){
     return Api().post('createClient', credentials)
+  },
+  getClients(credentials){
+    return Api().post('getClients', credentials)
   }
 }
 
