@@ -87,10 +87,9 @@ connection.conn.query(sql, function (err, result, fields) {
     message: `The Login was not successful`
   })
   console.log('the login was not successful');
-  }
+    }
+  })
 })
-});
-
 app.post('/register', (req,res) => {
   //getting variables from the post body
   var email = req.body.email

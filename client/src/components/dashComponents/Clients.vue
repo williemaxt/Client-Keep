@@ -49,6 +49,8 @@ export default {
       });
       i += 1;
     }
+    //setting cookie for total contacts
+    this.$cookies.set('total', i)
   }
 }
 </script>

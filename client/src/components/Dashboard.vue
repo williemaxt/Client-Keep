@@ -6,7 +6,7 @@
   <div class="card-body">
     <h5 class="card-title">Total Contacts</h5>
     <h6 class="card-subtitle mb-2 text-muted">So Far</h6>
-    <h1 class="card-text text-center display-3 text-danger">15</h1>
+    <h1 class="card-text text-center display-3 text-danger">{{total}}</h1>
   </div>
 </div>
   </div>
@@ -58,7 +58,9 @@ export default {
   data(){
     return{
       //put data here
-      userEmail: this.$cookies.get('email')
+      userEmail: this.$cookies.get('email'),
+      //this will get the cookie for total # of contacts
+      total: this.$cookies.get('total')
     }
   },
   components: {
