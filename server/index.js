@@ -11,6 +11,16 @@ app.use(bodyParser.json())
 
 console.log('server is running * * *');
 
+app.post('/deleteClients', (req,res) =>{
+  console.log('Delete Clients called');
+  var userEmail = req.body.userEmail;
+  var clientEmail = req.body.email;
+  var sql = 'DELETE FROM clients WHERE userEmail="'+userEmail+'" AND email="'+clientEmail+'"';
+  connection.conn.query(sql, function (err, result, fields) {
+    res.send('success');
+  });
+});
+
 app.post('/getClients', (req,res) => {
   //creating a variable for data
   var data;
@@ -37,7 +47,7 @@ app.post('/createClient', (req,res) => {
   // executing the query
   connection.conn.query(sql, function (err, result) {
     console.log(result);
-    res.send(result)
+    res.send('success');
   })
 });
 

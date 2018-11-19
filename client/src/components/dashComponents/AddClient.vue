@@ -56,7 +56,7 @@ export default {
         details: this.details
       })
 
-      if(response.data.message === 'success'){
+      if(response.data === 'success'){
         //emptying our fields
         this.name = null
         this.email = null

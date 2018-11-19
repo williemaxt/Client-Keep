@@ -3,13 +3,15 @@
 <div class="card-body">
   <h5 class="card-title text-danger">All Your Clients</h5>
   <div class="list-group">
-<a href="#" v-for="client in clientsList" class="list-group-item list-group-item-action flex-column align-items-start">
+<a href="#" v-for="client in clientsList" class="list-group-item list-group-item-action flex-column align-items-start" key: = 'client.email'>
   <div class="d-flex w-100 justify-content-between">
     <h5 class="mb-1">{{client.name}}</h5>
     <small>{{client.number}}</small>
   </div>
   <p class="mb-1">{{client.email}}</p>
   <p class="mb-1">{{client.details}}</p>
+  <button class="btn btn-outline-danger" v-on:click="deleteClients(client.email)">Delete</button>
+  <button class="btn btn-outline-warning" v-on:click="updateClients(client.email)">Update</button>
   <small>Donec id elit non mi porta.</small>
 </a>
 </div>
@@ -51,6 +53,25 @@ export default {
     }
     //setting cookie for total contacts
     this.$cookies.set('total', i)
+  },
+  methods: {
+  async  deleteClients(email){
+      //add request here
+      const confirmation = await ApiService.deleteClients({
+        userEmail: this.userEmail,
+        email: email
+      });
+      if(confirmation.data === 'success'){
+        //reload component
+        alert('Yay it worked')
+      }
+      else {
+        alert('there was a problem performing this action')
+      }
+    },
+    updateClients(){
+      //logic for updating clients
+    }
   }
 }
 </script>
@@ -58,5 +79,9 @@ export default {
 <style scoped>
 .list-group-item{
   border: none;
+}
+.list-group{
+  height: 55vh;
+  overflow-y: scroll;
 }
 </style>

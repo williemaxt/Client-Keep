@@ -16,6 +16,9 @@ export default {
   },
   getClients(credentials){
     return Api().post('getClients', credentials)
+  },
+  deleteClients(credentials){
+    return Api().post('deleteClients', credentials)
   }
 }
 

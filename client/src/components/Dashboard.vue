@@ -75,7 +75,6 @@ export default {
   .container{
     max-width: 1800px;
     font-family: 'K2D', sans-serif;
-    background: radial-gradient(#ff0000, #fff);
   }
   .card{
     margin-top:30px;
